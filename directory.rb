@@ -1,4 +1,3 @@
-student_count = 11
 students = [ 
   "Dr. Hannibal Lecter",
   "Darth Vader",
@@ -18,4 +17,4 @@ puts "-------------"
 # list of students
 students.each { |student| puts student }
 # No of students summary
-puts "Overall, we have #{student_count} great students"
+puts "Overall, we have #{students.length} great students"
