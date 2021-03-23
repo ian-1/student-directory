@@ -8,7 +8,7 @@ def input_students
     name = gets.chomp
     break if name == ""
     students.push({name: name, cohort: :november})
-    puts  "Now we have #{students.count} students"
+    puts "Now we have #{students.count} students"
   end
   students
 end
@@ -19,8 +19,8 @@ def print_header(school)
 end
 
 def print_list(students)
-  students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort].capitalize} cohort)"
+  students.each_with_index do |student, i|
+    puts "#{i + 1}) #{student[:name]} (#{student[:cohort].capitalize} cohort)"
   end
 end
 
