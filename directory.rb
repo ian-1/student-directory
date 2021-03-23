@@ -1,3 +1,4 @@
+school = "Villains Academy"
 students = [ 
   "Dr. Hannibal Lecter",
   "Darth Vader",
@@ -12,19 +13,19 @@ students = [
   "Norman Bates"
 ]
 
-def print_header()
-  puts "The students of Villains Academy"
+def print_header(school)
+  puts "The students of #{school}"
   puts "-------------"
 end
 
-def print_list(items)
-  items.each { |item| puts item }
+def print_list(students)
+  students.each { |student| puts student }
 end
 
-def print_no_of_summary(items)
-  puts "Overall, we have #{items.length} great students"
+def print_no_of_summary(students)
+  puts "Overall, we have #{students.length} great students"
 end
 
-print_header()
+print_header(school)
 print_list(students)
 print_no_of_summary(students)
