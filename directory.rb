@@ -24,7 +24,9 @@ def print_list(students)
   print_no_of_summary(students.length)
 end
 
-def print_list_letter_start(students, letter)
+def print_list_letter_start(students)
+  puts "Enter letter you would like to search for:"
+  letter = gets.chomp
   print_header()
   i = 0
   students.each do |student|
@@ -48,7 +50,7 @@ def interactive_menu(students)
     puts "  9) Exit program"
     user_menu_input = gets.chomp
     print_list(students) if user_menu_input == "1"
-    print_list_letter_start(students, "l") if user_menu_input == "2"
+    print_list_letter_start(students) if user_menu_input == "2"
     break if user_menu_input == "9"
   end
 end
