@@ -16,45 +16,41 @@ def input_students
 end
 
 def cohort_setter(cohort_string)
-  case cohort_string[0].downcase
-  when "j"
-    if cohort_string[1].downcase == "a"
-      cohort = :january
-    elsif cohort_string[2].downcase == "n"
-      cohort = :june
-    elsif cohort_string[2].downcase == "l"
-      cohort = :july
-    else
-      cohort = :unknown
+  cohort_string = cohort_string.downcase
+  cohort = :unknown
+  if cohort_string[0]
+    case cohort_string[0]
+    when "j"
+      if cohort_string[1] == "a"
+        cohort = :january
+      elsif cohort_string[2] == "n"
+        cohort = :june
+      elsif cohort_string[2] == "l"
+        cohort = :july
+      end
+    when "f"
+      cohort = :february
+    when "m"
+      if cohort_string[2] == "r"
+        cohort = :march
+      elsif cohort_string[2] == "y"
+        cohort = :may
+      end
+    when "a"
+      if cohort_string[1] == "p"
+        cohort = :april
+      elsif cohort_string[1] == "u"
+        cohort = :august
+      end
+    when "s"
+      cohort = :september
+    when "o"
+      cohort = :october
+    when "n"
+      cohort = :november
+    when "d"
+      cohort = :december
     end
-  when "f"
-    cohort = :february
-  when "m"
-    if cohort_string[2].downcase == "r"
-      cohort = :march
-    elsif cohort_string[2].downcase == "y"
-      cohort = :may
-    else
-      cohort = :unknown
-    end
-  when "a"
-    if cohort_string[1].downcase == "p"
-      cohort = :april
-    elsif cohort_string[1].downcase == "u"
-      cohort = :august
-    else
-      cohort = :unknown
-    end
-  when "s"
-    cohort = :september
-  when "o"
-    cohort = :october
-  when "n"
-    cohort = :november
-  when "d"
-    cohort = :december
-  else
-    cohort = :unknown
   end
   cohort
 end
