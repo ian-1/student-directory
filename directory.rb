@@ -44,16 +44,36 @@ def print_list_letter_start(students)
   print_no_of_summary(i)
 end
 
+def print_list_until_loop(students)
+  print_header()
+  i = 0
+  until i == students.length do
+    puts "#{i + 1}) #{students[i][:name]} (#{students[i][:cohort].capitalize} cohort)"
+    i += 1
+  end
+  print_no_of_summary(students.length)
+end
+
 def interactive_menu(students)
   loop do
     puts "What would you like to do?"
     puts "  1) Print list of students"
     puts "  2) Print list of sudent names starting with a letter"
+    puts "  3) Print list of students (using until loop)"
     puts "  9) Exit program"
     user_menu_input = gets.chomp
-    print_list(students) if user_menu_input == "1"
-    print_list_letter_start(students) if user_menu_input == "2"
-    break if user_menu_input == "9"
+    case user_menu_input
+    when "1"
+      print_list(students)
+    when "2"
+      print_list_letter_start(students)
+    when "3"
+      print_list_until_loop(students)
+    when "9"
+      break
+    else
+      puts "Sorry, I didn't understand your selection".center(50, "😟")
+    end
   end
 end
 
