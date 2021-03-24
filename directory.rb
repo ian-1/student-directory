@@ -7,8 +7,13 @@ def input_students
     name = gets[0...-1]
     break if name == ""
     puts "cohort:"
-    cohort_string = gets.chomp
-    cohort = cohort_setter(cohort_string)
+    cohort = :unknown
+    loop do
+      cohort_string = gets.chomp
+      cohort = cohort_setter(cohort_string)
+      break if cohort != :unknown
+      puts "please enter month of cohort:" 
+    end
     students.push({name: name, cohort: cohort})
     puts "Now we have #{students.count} students"
   end
