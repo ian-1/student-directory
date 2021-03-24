@@ -12,8 +12,14 @@ def input_students
 end
 
 def print_header()
-  puts "The Students of Villains Academy"
-  puts "-------------"
+  puts "".center(50, "°")
+  puts "The Students of Villains Academy".center(50)
+  puts "-------------".center(50)
+end
+
+def print_no_of_summary(number)
+  puts "This is #{number} great students".center(50)
+  puts "".center(50, "°")
 end
 
 def print_list(students)
@@ -36,10 +42,6 @@ def print_list_letter_start(students)
     end
   end
   print_no_of_summary(i)
-end
-
-def print_no_of_summary(number)
-  puts "This is #{number} great students"
 end
 
 def interactive_menu(students)
