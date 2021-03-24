@@ -44,6 +44,20 @@ def print_list_letter_start(students)
   print_no_of_summary(i)
 end
 
+def print_list_shorter_than(students)
+  puts "Enter how many characters for your maximun:"
+  chars = gets.chomp
+  print_header()
+  i = 0
+  students.each do |student|
+    if student[:name].length <= chars.to_i
+      puts "#{i + 1}) #{student[:name]} (#{student[:cohort].capitalize} cohort)"
+      i += 1
+    end
+  end
+  print_no_of_summary(i)
+end
+
 def print_list_until_loop(students)
   print_header()
   i = 0
@@ -60,6 +74,7 @@ def interactive_menu(students)
     puts "  1) Print list of students"
     puts "  2) Print list of sudent names starting with a letter"
     puts "  3) Print list of students (using until loop)"
+    puts "  4) Print names shorter than X characters"
     puts "  9) Exit program"
     user_menu_input = gets.chomp
     case user_menu_input
@@ -69,6 +84,8 @@ def interactive_menu(students)
       print_list_letter_start(students)
     when "3"
       print_list_until_loop(students)
+    when "4"
+      print_list_shorter_than(students)
     when "9"
       break
     else
