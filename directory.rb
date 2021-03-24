@@ -3,12 +3,60 @@ def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   loop do
-    name = gets.chomp
+    puts "name:"
+    name = gets[0...-1]
     break if name == ""
-    students.push({name: name, cohort: :november})
+    puts "cohort:"
+    cohort_string = gets.chomp
+    cohort = cohort_setter(cohort_string)
+    students.push({name: name, cohort: cohort})
     puts "Now we have #{students.count} students"
   end
   students
+end
+
+def cohort_setter(cohort_string)
+  case cohort_string[0].downcase
+  when "j"
+    if cohort_string[1].downcase == "a"
+      cohort = :january
+    elsif cohort_string[2].downcase == "n"
+      cohort = :june
+    elsif cohort_string[2].downcase == "l"
+      cohort = :july
+    else
+      cohort = :unknown
+    end
+  when "f"
+    cohort = :february
+  when "m"
+    if cohort_string[2].downcase == "r"
+      cohort = :march
+    elsif cohort_string[2].downcase == "y"
+      cohort = :may
+    else
+      cohort = :unknown
+    end
+  when "a"
+    if cohort_string[1].downcase == "p"
+      cohort = :april
+    elsif cohort_string[1].downcase == "u"
+      cohort = :august
+    else
+      cohort = :unknown
+    end
+  when "s"
+    cohort = :september
+  when "o"
+    cohort = :october
+  when "n"
+    cohort = :november
+  when "d"
+    cohort = :december
+  else
+    cohort = :unknown
+  end
+  cohort
 end
 
 def print_header()
