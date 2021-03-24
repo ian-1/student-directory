@@ -117,6 +117,26 @@ def print_list_until_loop(students)
   print_no_of_summary(students.length)
 end
 
+def print_list_by_cohort(students)
+  puts "Enter the cohort you would like to print list for:"
+  cohort = :unknown
+  loop do
+    cohort_string = gets.chomp
+    cohort = cohort_setter(cohort_string)
+    break if cohort != :unknown
+    puts "please enter month of cohort:" 
+  end
+  print_header()
+  i = 0
+  students.each do |student|
+    if student[:cohort] == cohort
+      puts "#{i + 1}) #{student[:name]} (#{student[:cohort].capitalize} cohort)"
+      i += 1
+    end
+  end
+  print_no_of_summary(i)
+end
+
 def interactive_menu(students)
   loop do
     puts "What would you like to do?"
@@ -124,6 +144,7 @@ def interactive_menu(students)
     puts "  2) Print list of sudent names starting with a letter"
     puts "  3) Print list of students (using until loop)"
     puts "  4) Print names shorter than X characters"
+    puts "  5) Print list by cohort"
     puts "  9) Exit program"
     user_menu_input = gets.chomp
     case user_menu_input
@@ -135,6 +156,8 @@ def interactive_menu(students)
       print_list_until_loop(students)
     when "4"
       print_list_shorter_than(students)
+    when "5"
+      print_list_by_cohort(students)
     when "9"
       break
     else
