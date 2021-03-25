@@ -57,12 +57,12 @@ def print_no_of_summary(number)
   puts ''.center(50, '°')
 end
 
-def print_list(students)
+def print_list
   print_header
-  students.each_with_index do |student, i|
+  @students.each_with_index do |student, i|
     puts "#{i + 1}) #{student[:name]} (#{student[:cohort].capitalize} cohort)"
   end
-  print_no_of_summary(students.length)
+  print_no_of_summary(@students.length)
 end
 
 def letter_from_user
@@ -70,11 +70,11 @@ def letter_from_user
   gets.chomp
 end
 
-def print_list_letter_start(students)
+def print_list_letter_start
   letter = letter_from_user
   print_header
   i = 0
-  students.each do |student|
+  @students.each do |student|
     if student[:name][0] == letter
       puts "#{i + 1}) #{student[:name]} (#{student[:cohort].capitalize} cohort)"
       i += 1
@@ -88,11 +88,11 @@ def characters_from_user
   gets.chomp
 end
 
-def print_list_shorter_than(students)
+def print_list_shorter_than
   chars = characters_from_user
   print_header
   i = 0
-  students.each do |student|
+  @students.each do |student|
     if student[:name].length <= chars.to_i
       puts "#{i + 1}) #{student[:name]} (#{student[:cohort].capitalize} cohort)"
       i += 1
@@ -101,14 +101,14 @@ def print_list_shorter_than(students)
   print_no_of_summary(i)
 end
 
-def print_list_until_loop(students)
+def print_list_until_loop
   print_header
   i = 0
-  until i == students.length
-    puts "#{i + 1}) #{students[i][:name]} (#{students[i][:cohort].capitalize} cohort)"
+  until i == @students.length
+    puts "#{i + 1}) #{@students[i][:name]} (#{@students[i][:cohort].capitalize} cohort)"
     i += 1
   end
-  print_no_of_summary(students.length)
+  print_no_of_summary(@students.length)
 end
 
 def cohort_from_user
@@ -124,11 +124,11 @@ def cohort_from_user
   cohort
 end
 
-def print_list_by_cohort(students)
+def print_list_by_cohort
   cohort = cohort_from_user
   print_header
   i = 0
-  students.each do |student|
+  @students.each do |student|
     if student[:cohort] == cohort
       puts "#{i + 1}) #{student[:name]} (#{student[:cohort].capitalize} cohort)"
       i += 1
@@ -137,42 +137,38 @@ def print_list_by_cohort(students)
   print_no_of_summary(i)
 end
 
-def print_menu
-  puts 'What would you like to do?'
-  puts '  1) Print list of students'
-  puts '  2) Print list of sudent names starting with a letter'
-  puts '  3) Print list of students (using until loop)'
-  puts '  4) Print names shorter than X characters'
-  puts '  5) Print list by cohort'
-  puts '  9) Exit program'
-end
-
-def act_on_menu_input(students, input)
+def act_on_menu_input(input)
   case input
   when '1'
-    print_list(students)
+    print_list
   when '2'
-    print_list_letter_start(students)
+    print_list_letter_start
   when '3'
-    print_list_until_loop(students)
+    print_list_until_loop
   when '4'
-    print_list_shorter_than(students)
+    print_list_shorter_than
   when '5'
-    print_list_by_cohort(students)
+    print_list_by_cohort
   else
     puts "Sorry, I didn't understand your selection".center(50, '😟')
   end
 end
 
-def interactive_menu(students)
+def interactive_menu
   loop do
-    print_menu
+    puts 'What would you like to do?'
+    puts '  1) Print list of students'
+    puts '  2) Print list of sudent names starting with a letter'
+    puts '  3) Print list of students (using until loop)'
+    puts '  4) Print names shorter than X characters'
+    puts '  5) Print list by cohort'
+    puts '  9) Exit program'
     user_menu_input = gets.chomp
     break if user_menu_input == '9'
 
-    act_on_menu_input(students, user_menu_input)
+    act_on_menu_input(user_menu_input)
   end
 end
 
-students = input_students
-interactive_menu(students)
+@students = input_students
+interactive_menu
