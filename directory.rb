@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 def input_students
-  students = []
   puts 'Please enter the names of the students'
   puts 'To finish, just hit return twice'
   loop do
@@ -18,10 +17,9 @@ def input_students
 
       puts 'please enter month of cohort:'
     end
-    students.push({ name: name, cohort: cohort })
-    puts "Now we have #{students.count} students"
+    @students.push({ name: name, cohort: cohort })
+    puts "Now we have #{@students.count} students"
   end
-  students
 end
 
 def cohort_setter(cohort_string)
@@ -53,7 +51,8 @@ def print_header
 end
 
 def print_no_of_summary(number)
-  puts "This is #{number} great students".center(50)
+  number > 1 ? s = 's' : s = ''
+  puts "This is #{number} great student#{s}".center(50)
   puts ''.center(50, '°')
 end
 
@@ -137,18 +136,30 @@ def print_list_by_cohort
   print_no_of_summary(i)
 end
 
+def save_student_list
+  file = File.open('students.csv', 'w')
+  @students.each do |student|
+    file.puts "#{student[:name]},#{student[:cohort].to_s}"
+  end
+  file.close
+end
+
 def act_on_menu_input(input)
   case input
   when '1'
-    print_list
+    input_students
   when '2'
-    print_list_letter_start
+    print_list
   when '3'
-    print_list_until_loop
+    print_list_letter_start
   when '4'
-    print_list_shorter_than
+    print_list_until_loop
   when '5'
+    print_list_shorter_than
+  when '6'
     print_list_by_cohort
+  when '7'
+    save_student_list
   else
     puts "Sorry, I didn't understand your selection".center(50, '😟')
   end
@@ -157,11 +168,13 @@ end
 def interactive_menu
   loop do
     puts 'What would you like to do?'
-    puts '  1) Print list of students'
-    puts '  2) Print list of sudent names starting with a letter'
-    puts '  3) Print list of students (using until loop)'
-    puts '  4) Print names shorter than X characters'
-    puts '  5) Print list by cohort'
+    puts '  1) Add students to list'
+    puts '  2) Print list of students'
+    puts '  3) Print list of sudent names starting with a letter'
+    puts '  4) Print list of students (using until loop)'
+    puts '  5) Print names shorter than X characters'
+    puts '  6) Print list by cohort'
+    puts '  7) Save the list to students.csv'
     puts '  9) Exit program'
     user_menu_input = gets.chomp
     break if user_menu_input == '9'
@@ -170,5 +183,5 @@ def interactive_menu
   end
 end
 
-@students = input_students
+@students = []
 interactive_menu
