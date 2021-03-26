@@ -51,7 +51,9 @@ def print_header
 end
 
 def print_no_of_summary(number)
+  # rubocop:disable Style/ConditionalAssignment
   number > 1 ? s = 's' : s = ''
+  # rubocop:enable Style/ConditionalAssignment
   puts "This is #{number} great student#{s}".center(50)
   puts ''.center(50, '°')
 end
@@ -139,11 +141,21 @@ end
 def save_student_list
   file = File.open('students.csv', 'w')
   @students.each do |student|
-    file.puts "#{student[:name]},#{student[:cohort].to_s}"
+    file.puts "#{student[:name]},#{student[:cohort]}"
   end
   file.close
 end
 
+def load_student_list
+  file = File.open('students.csv', 'r')
+  file.readlines.each do |student|
+    name, cohort = student.chomp.split(',')
+    @students.push({name: name, cohort: cohort.to_sym})
+  end
+  file.close
+end
+
+# rubocop:disable Metrics/CyclomaticComplexity
 def act_on_menu_input(input)
   case input
   when '1'
@@ -164,6 +176,7 @@ def act_on_menu_input(input)
     puts "Sorry, I didn't understand your selection".center(50, '😟')
   end
 end
+# rubocop:enable Metrics/CyclomaticComplexity
 
 def interactive_menu
   loop do
@@ -184,4 +197,5 @@ def interactive_menu
 end
 
 @students = []
+load_student_list
 interactive_menu
